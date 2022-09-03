@@ -34,55 +34,37 @@ const Series = () => {
   return (
     <div>
       <span className="pageTitle">Discover Series</span>
-      {loading ? (
-        <div>
-          <LinearProgress
-            style={{
-              backgroundColor: "gold",
-              marginBottom: "10px",
-            }}
-          />
-          <LinearProgress
-            style={{
-              backgroundColor: "gold",
-              marginBottom: "10px",
-            }}
-          />
-          <LinearProgress style={{ backgroundColor: "gold" }} />
-        </div>
-      ) : (
-        <>
-          <Genres
-            type="tv"
-            selectedGenres={selectedGenres}
-            setSelectedGenres={setSelectedGenres}
-            genres={genres}
-            setGenres={setGenres}
-            setPage={setPage}
-          />
-          <div
-            className="trending"
-            style={{
-              display: "flex",
-              flexWrap: "wrap",
-              justifyContent: "space-around",
-            }}
-          >
-            {content &&
-              content.map((c) => (
-                <SingleCard
-                  key={c.id}
-                  id={c.id}
-                  poster={c.poster_path}
-                  title={c.title || c.name}
-                  date={c.first_air_date || c.release_date}
-                  media_type="tv"
-                  vote_average={c.vote_average}
-                />
-              ))}
-          </div>
-        </>
-      )}
+
+      <Genres
+        type="tv"
+        selectedGenres={selectedGenres}
+        setSelectedGenres={setSelectedGenres}
+        genres={genres}
+        setGenres={setGenres}
+        setPage={setPage}
+      />
+      <div
+        className="trending"
+        style={{
+          display: "flex",
+          flexWrap: "wrap",
+          justifyContent: "space-around",
+        }}
+      >
+        {content &&
+          content.map((c) => (
+            <SingleCard
+              key={c.id}
+              id={c.id}
+              poster={c.poster_path}
+              title={c.title || c.name}
+              date={c.first_air_date || c.release_date}
+              media_type="tv"
+              vote_average={c.vote_average}
+            />
+          ))}
+      </div>
+
       {numOfPages > 1 && (
         <CustomPagination setPage={setPage} numOfPages={numOfPages} />
       )}
