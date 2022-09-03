@@ -1,3 +1,4 @@
+import { LinearProgress } from "@mui/material";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import Genres from "../../components/Genres/Genres";
@@ -12,13 +13,15 @@ const Series = () => {
   const [content, setContent] = useState([]);
   const [numOfPages, setNumOfPages] = useState();
   const genreforURL = useGenre(selectedGenres);
-
+  const [loading, setLoading] = useState(false);
   const fetchSeries = async () => {
+    setLoading(true);
     const { data } = await axios.get(
       `https://api.themoviedb.org/3/discover/tv?api_key=${process.env.REACT_APP_API_KEY}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${page}&with_genres=${genreforURL}`
     );
     setContent(data.results);
     setNumOfPages(data.total_pages);
+    setLoading(false);
     // console.log(data);
   };
 
@@ -31,35 +34,55 @@ const Series = () => {
   return (
     <div>
       <span className="pageTitle">Discover Series</span>
-      <Genres
-        type="tv"
-        selectedGenres={selectedGenres}
-        setSelectedGenres={setSelectedGenres}
-        genres={genres}
-        setGenres={setGenres}
-        setPage={setPage}
-      />
-      <div
-        className="trending"
-        style={{
-          display: "flex",
-          flexWrap: "wrap",
-          justifyContent: "space-around",
-        }}
-      >
-        {content &&
-          content.map((c) => (
-            <SingleCard
-              key={c.id}
-              id={c.id}
-              poster={c.poster_path}
-              title={c.title || c.name}
-              date={c.first_air_date || c.release_date}
-              media_type="tv"
-              vote_average={c.vote_average}
-            />
-          ))}
-      </div>
+      {loading ? (
+        <div>
+          <LinearProgress
+            style={{
+              backgroundColor: "gold",
+              marginBottom: "10px",
+            }}
+          />
+          <LinearProgress
+            style={{
+              backgroundColor: "gold",
+              marginBottom: "10px",
+            }}
+          />
+          <LinearProgress style={{ backgroundColor: "gold" }} />
+        </div>
+      ) : (
+        <>
+          <Genres
+            type="tv"
+            selectedGenres={selectedGenres}
+            setSelectedGenres={setSelectedGenres}
+            genres={genres}
+            setGenres={setGenres}
+            setPage={setPage}
+          />
+          <div
+            className="trending"
+            style={{
+              display: "flex",
+              flexWrap: "wrap",
+              justifyContent: "space-around",
+            }}
+          >
+            {content &&
+              content.map((c) => (
+                <SingleCard
+                  key={c.id}
+                  id={c.id}
+                  poster={c.poster_path}
+                  title={c.title || c.name}
+                  date={c.first_air_date || c.release_date}
+                  media_type="tv"
+                  vote_average={c.vote_average}
+                />
+              ))}
+          </div>
+        </>
+      )}
       {numOfPages > 1 && (
         <CustomPagination setPage={setPage} numOfPages={numOfPages} />
       )}
