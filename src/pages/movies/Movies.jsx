@@ -5,7 +5,6 @@ import SingleCard from "../../components/singleCard/SingleCard";
 import useGenre from "../../hooks/useGenre";
 import CustomPagination from "../../components/Pagination/CustomPagination";
 
-
 const Movies = () => {
   const [genres, setGenres] = useState([]);
   const [selectedGenres, setSelectedGenres] = useState([]);
@@ -13,18 +12,16 @@ const Movies = () => {
   const [content, setContent] = useState([]);
   const [numOfPages, setNumOfPages] = useState();
   const genreforURL = useGenre(selectedGenres);
-  const [ setLoading] = useState(false);
+
   // console.log(selectedGenres);
 
   const fetchMovies = async () => {
-    setLoading(true);
     const { data } = await axios.get(
       `https://api.themoviedb.org/3/discover/movie?api_key=${process.env.REACT_APP_API_KEY}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${page}&with_genres=${genreforURL}`
     );
     console.log(data.results);
     setContent(data.results);
     setNumOfPages(data.total_pages);
-    setLoading(false);
   };
 
   useEffect(() => {
