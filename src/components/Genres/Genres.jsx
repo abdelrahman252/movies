@@ -2,6 +2,7 @@ import Chip from "@mui/material/Chip";
 import axios from "axios";
 import { useEffect } from "react";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
+
 const Genres = ({
   selectedGenres,
   setSelectedGenres,
@@ -55,8 +56,7 @@ const Genres = ({
               key={genre.id}
               color="primary"
               clickable
-             
-              onDelete={() => handleRemove(genre)}
+              onClick={() => handleRemove(genre)}
             />
           ))}
         {genres &&
@@ -66,7 +66,6 @@ const Genres = ({
               label={genre.name}
               key={genre.id}
               clickable
-              
               onClick={() => handleAdd(genre)}
             />
           ))}
