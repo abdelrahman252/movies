@@ -1,4 +1,4 @@
-import { LinearProgress } from "@mui/material";
+
 import axios from "axios";
 import { useEffect, useState } from "react";
 import Genres from "../../components/Genres/Genres";
@@ -13,7 +13,7 @@ const Series = () => {
   const [content, setContent] = useState([]);
   const [numOfPages, setNumOfPages] = useState();
   const genreforURL = useGenre(selectedGenres);
-  const [loading, setLoading] = useState(false);
+  const [ setLoading] = useState(false);
   const fetchSeries = async () => {
     setLoading(true);
     const { data } = await axios.get(
