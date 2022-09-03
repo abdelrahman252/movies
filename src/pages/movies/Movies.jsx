@@ -4,7 +4,7 @@ import Genres from "../../components/Genres/Genres";
 import SingleCard from "../../components/singleCard/SingleCard";
 import useGenre from "../../hooks/useGenre";
 import CustomPagination from "../../components/Pagination/CustomPagination";
-import { LinearProgress } from "@mui/material";
+
 
 const Movies = () => {
   const [genres, setGenres] = useState([]);
@@ -13,7 +13,7 @@ const Movies = () => {
   const [content, setContent] = useState([]);
   const [numOfPages, setNumOfPages] = useState();
   const genreforURL = useGenre(selectedGenres);
-  const [loading, setLoading] = useState(false);
+  const [ setLoading] = useState(false);
   // console.log(selectedGenres);
 
   const fetchMovies = async () => {
