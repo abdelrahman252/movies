@@ -36,7 +36,7 @@ const Movies = () => {
   return (
     <div>
       <span className="pageTitle">Discover Movies</span>
-      {loading ? (
+      {/* {loading ? (
         <div>
           <LinearProgress
             style={{
@@ -52,39 +52,39 @@ const Movies = () => {
           />
           <LinearProgress style={{ backgroundColor: "gold" }} />
         </div>
-      ) : (
-        <>
-          <Genres
-            type="movie"
-            selectedGenres={selectedGenres}
-            setSelectedGenres={setSelectedGenres}
-            genres={genres}
-            setGenres={setGenres}
-            setPage={setPage}
-          />
-          <div
-            className="trending"
-            style={{
-              display: "flex",
-              flexWrap: "wrap",
-              justifyContent: "space-around",
-            }}
-          >
-            {content &&
-              content.map((c) => (
-                <SingleCard
-                  key={c.id}
-                  id={c.id}
-                  poster={c.poster_path}
-                  title={c.title || c.name}
-                  date={c.first_air_date || c.release_date}
-                  media_type="movie"
-                  vote_average={c.vote_average}
-                />
-              ))}
-          </div>
-        </>
-      )}
+      ) : ( */}
+      <>
+        <Genres
+          type="movie"
+          selectedGenres={selectedGenres}
+          setSelectedGenres={setSelectedGenres}
+          genres={genres}
+          setGenres={setGenres}
+          setPage={setPage}
+        />
+        <div
+          className="trending"
+          style={{
+            display: "flex",
+            flexWrap: "wrap",
+            justifyContent: "space-around",
+          }}
+        >
+          {content &&
+            content.map((c) => (
+              <SingleCard
+                key={c.id}
+                id={c.id}
+                poster={c.poster_path}
+                title={c.title || c.name}
+                date={c.first_air_date || c.release_date}
+                media_type="movie"
+                vote_average={c.vote_average}
+              />
+            ))}
+        </div>
+      </>
+      {/* )} */}
       {numOfPages > 1 && (
         <CustomPagination setPage={setPage} numOfPages={numOfPages} />
       )}
